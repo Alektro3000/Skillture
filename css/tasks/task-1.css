@@ -1,0 +1,214 @@
+.image {
+    display: grid;
+    grid-template-rows: 1fr 90% 1fr;
+    grid-template-columns: 1fr 90% 1fr;
+    height: 400px;
+    width: 400px;
+    margin: auto;
+    background: radial-gradient(circle at top right, #fff, #1f40d2);
+    font-size: 12px;
+    align-items: stretch;
+    justify-items: stretch;
+}
+.image * {
+    box-sizing: content-box;
+}
+@supports (container-type: size) {
+    .image {
+        max-height: 100%;
+        max-width: 100%;
+        aspect-ratio: 1;
+        width: auto;
+        height: auto;
+        container-type: size;
+    }
+}
+
+@container (width > -1px) {
+    div {
+        font-size: 3cqw;
+    }
+}
+
+.image__border {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image__border div {
+    border-radius: 100%;
+    width: 1.2em;
+    height: 1.2em;
+    background-color: #f2ae2b;
+}
+
+.image__border--up {
+    grid-area: 2 / 1 / 3 / 2;
+    flex-flow: column;
+}
+
+.image__border--left {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.image__border--down {
+    grid-area: 2 / 3 / 3 / 4;
+    flex-flow: column;
+}
+
+.image__border--right {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+
+.image__center {
+    grid-area: 2 / 2 / 3 / 3;
+    background: radial-gradient(circle at 50% 70%, #ccd9f1, #4965e1);
+    position: relative;
+    overflow: hidden;
+}
+
+.image__triangles {
+    position: absolute;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(135deg, #00fd01 0, #00fd01 0.7em, transparent 0, transparent 50%);
+    background-size: 2em 2em;
+    background-color: #0d8c0d;
+    clip-path: polygon(0% 100%, 0 85%, 12.5% 70%, 25% 85%, 37.5% 70%, 50% 85%, 62.5% 70%, 75% 85%, 87.5% 70%, 100% 85%, 100% 100%);
+}
+
+.image__mushroom {
+    position: absolute;
+    top: 40%;
+    left: 11%;
+    width: 15%;
+    height: 45%;
+    background: #d3caca;
+    border-radius: 100%;
+    box-sizing: border-box;
+    border: #671616 solid 0.5em;
+
+}
+
+.image__mushroom::after {
+    content: '';
+    display: block;
+    height: 53%;
+    width: 340%;
+    translate: -35% -50%;
+    background: radial-gradient(circle at 65% 25%, #fafbfe 0%, #671616 70%);
+    border-radius: 6em 6em 0 0;
+
+}
+
+.image__mushroom--tilted {
+    rotate: 30deg;
+    scale: 0.7;
+    left: 10em;
+    top: 13.5em;
+
+}
+
+.image__cloud {
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    height: 25%;
+    background: radial-gradient(#fafbfe, #6e87f4);
+    clip-path: path("M 80 42 a 55 23 0 1 0 40 -25 a 55 23 0 1 0 -40 25 z");
+}
+
+.image__cloud--1 {
+    clip-path: ellipse(27% 33% at 33% 29%);
+}
+
+.image__cloud--2 {
+    clip-path: ellipse(27% 33% at 67% 56%);
+}
+
+.image__butterfly {
+    position: absolute;
+    left: 20em;
+    top: 7em;
+    rotate: 45deg;
+}
+
+.image__butterfly-head {
+    width: 2em;
+    height: 1.7em;
+    margin: -1em 0;
+    background: #d9bb2f;
+    border-radius: 100%;
+    border: #c2ac39 solid;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 0.3em;
+    gap: 0.2em;
+}
+
+.image__butterfly-eye {
+    width: 0.8em;
+    height: 0.8em;
+    background: #000;
+    border-radius: 100%;
+
+}
+
+.image__butterfly-body {
+    width: 2em;
+    height: 6em;
+    background: #d9bb2f;
+    border-radius: 100%;
+    border: #c2ac39 solid;
+}
+
+.image__butterfly-wing {
+    position: absolute;
+    width: 4em;
+    height: 1.6em;
+    background: #6b85f5;
+    border: #334fc8 solid;
+    border-radius: 100%;
+    z-index: -1;
+    top: 2em;
+    --offset: 1.5em;
+    animation: 1.5s ease-in-out 0s infinite alternate running flap;
+}
+
+.image__butterfly-wing--1 {
+    transform-origin: center left;
+    left: var(--offset);
+    --deg: 30deg;
+}
+
+.image__butterfly-wing--2 {
+    transform-origin: center left;
+    left: var(--offset);
+    --deg: -20deg;
+}
+
+.image__butterfly-wing--3 {
+    transform-origin: center right;
+    right: var(--offset);
+    --deg: -30deg;
+}
+
+.image__butterfly-wing--4 {
+    transform-origin: center right;
+    right: var(--offset);
+    --deg: 20deg;
+}
+
+@keyframes flap {
+    0% {
+        rotate: var(--deg);
+    }
+
+    100% {
+        rotate: calc(var(--deg) * 2);
+    }
+}

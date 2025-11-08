@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        if(!confirm("Приступаем?"))
+        {
+            alert("ходите босиком");
+        }
+        else
+            alert("Расчёт длины каблука");
+    </script>
+    Пол:<br/>
+    <label>
+        <input type="radio" name="sex" value="m" checked>
+        Мужской
+    </label><br>
+
+    <label>
+        <input type="radio" name="sex" value="f">
+        Женский
+    </label><br>
+
+    Длина стопы:
+    <label>
+        <input type="number" name="length" value="34">
+        см
+    </label><br>
+    
+    <label>
+        <input id = "submit" type="button" value="Рассчитать">
+    </label><br>
+    <div>
+        Длина каблука: <span id = "length"> </span> см;<br>
+        <img id = "image" src="" alt=""/>
+    </div>
+    <script>
+        document.querySelector("#submit").addEventListener("click", () => {
+            const sex = document.querySelector('input[name="sex"]:checked').value;
+            const length = document.querySelector('input[name="length"]').value;
+
+            if(sex == "m")
+            {
+                document.querySelector("#length").innerHTML = 1;
+                document.querySelector("#image").src = 'images/boots/boot2.png';
+            }
+            else
+            {
+                const k = length/7;
+                document.querySelector("#length").innerHTML = ""+k;
+                document.querySelector("#image").src =  k > 5 ? 'images/boots/boot3.png' : 'images/boots/boot1.png';
+            }
+        } )
+    </script>
+
+</body>
+</html>

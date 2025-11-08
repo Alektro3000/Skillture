@@ -1,0 +1,129 @@
+.toys {
+  position: relative;
+  aspect-ratio: 1;
+  transition: 0.5s;
+}
+.toys__bg {
+  width: 100%;
+}
+.toys__car-wrapper {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 44%;
+  height: 22%;
+  display: flex;
+  align-items: flex-end;
+}
+.toys__car-wrapper::before {
+  content: "";
+}
+.toys__car {
+  width: 50%;
+}
+.toys:hover .toys__car-wrapper::before {
+  transition: 0.5s;
+  animation: car-moving 1s ease-in-out infinite alternate;
+}
+@keyframes car-moving {
+  from {
+    flex-grow: 0;
+  }
+  to {
+    flex-grow: 1;
+  }
+}
+.toys__boat-wrapper {
+  position: absolute;
+  top: 47%;
+  left: 40%;
+  height: 22%;
+  width: 27%;
+  display: flex;
+  align-items: flex-end;
+  --deg: 12.5deg;
+}
+.toys__boat {
+  width: 100%;
+}
+.toys__boat-wrapper:hover .toys__boat {
+  animation: boat-moving 3s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+@keyframes boat-moving {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(var(--deg));
+  }
+  75% {
+    transform: rotate(calc(var(--deg) * -1));
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.toys__name {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  right: 0;
+  height: 28%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: 80px;
+  color: #fff;
+  opacity: 0;
+  transition: 0.5s;
+}
+.toys:hover:not(:active) .toys__name {
+  opacity: 1;
+}
+.toys:active {
+  filter: sepia(0.4);
+}
+.toys__buy-text {
+  position: absolute;
+  top: 3%;
+  left: -3%;
+  transform: rotate(-25deg);
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  color: #fff;
+  opacity: 0;
+  transition: 0.5s;
+}
+.toys:active .toys__buy-text {
+  opacity: 1;
+}
+.toys__char {
+  offset-rotate: 0deg;
+  position: absolute;
+  offset-path: var(--path);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  offset-distance: 0%;
+  transition: all 0.2s 4.8s, offset-distance 5s;
+  --path: path("M 26,154                    C 34,110                    34,56                    60,34                    88,14                    114,12                    140,34                    166,56                    180,132                    160,152                    140,174                    120,178                    106,150                    94,122                    150,48                    190,44                    230,40                    262,84                    268,114                    c 6,30                    -8,60                    -32,58                    -22,0                    -30,-22                    -22,-50                    8,-28                    58,-64                    90,-58                    32,6                    52,32                    54,62                    2,28                    -22,76                    -54,36                    -32,-40                    56,-72                    80,-8") ;
+}
+.toys:active .toys__char {
+  transition: all 0.2s, offset-distance 5s;
+  opacity: 1;
+  offset-distance: 100%;
+}
+@keyframes char_movement {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}/*# sourceMappingURL=task-2.css.map */
