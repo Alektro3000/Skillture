@@ -161,11 +161,11 @@ function questionCallback() {
     if (!isAbleToProceed) {
         return;
     }
-    document.getElementById('quiz__container').replaceChildren();
     if (answers.length < testData.length) {
         buildQuestion(testData[answers.length], answers.length)
     }
     else {
+        document.getElementById('quiz__container').replaceChildren();
         const root = document.getElementById('quiz__container');
         const endDiv = document.createElement('div');
         endDiv.className = 'quiz__end';
