@@ -27,13 +27,14 @@
 }
 
 .header {
-  position: absolute;
+  position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1;
+  z-index: 10;
+  background: #0e1724;
+  padding: 12px 0;
 }
 .header__navigation {
-  padding-top: 42px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -347,7 +348,6 @@
   background: transparent;
   display: grid;
   place-items: center;
-  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.7), inset 0 -6px 18px rgba(2, 6, 23, 0.35);
   transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.2, 1), filter 0.35s;
   /* the 'S' shape is built from two rounded bands using pseudo-elements */
 }
@@ -487,9 +487,6 @@
 .accordion__item:hover, .accordion__item--active {
   box-shadow: 0 18px 88px -4px rgba(255, 255, 255, 0.14), 0 8px 28px -6px rgba(255, 255, 255, 0.12);
   background: #2e64e7;
-}
-.accordion__item-icon {
-  padding: 14px;
 }
 .accordion__item-title {
   font-family: var(--font-family);

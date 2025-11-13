@@ -1,0 +1,79 @@
+.drag {
+  display: flex;
+  flex-direction: column;
+  min-width: 40%;
+  gap: 10px;
+}
+.drag .drag__word-container {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px;
+  color: black;
+  background-color: var(--color);
+}
+.drag .drag__intermediate-container {
+  min-height: 300px;
+  border: 1px red solid;
+  position: relative;
+  overflow: hidden;
+}
+.drag .drag__intermediate-container .drag__word-container {
+  position: absolute;
+  background-color: white;
+}
+.drag .drag__key {
+  pointer-events: none;
+}
+.drag .drag__word {
+  pointer-events: none;
+}
+.drag .drag__down {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.drag .drag__input {
+  flex: 1 0 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drag .drag__default-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  flex: 1;
+  min-width: 130px;
+  border: 1px white solid;
+  align-items: center;
+}
+.drag #drag__input {
+  flex: 3;
+}
+.drag #drag__submit {
+  flex: 1;
+}
+.drag .drag__input-wrapper {
+  display: flex;
+  padding: 10px;
+}
+.drag .drag__out-container {
+  min-height: 300px;
+  border: 1px solid blue;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  align-content: flex-start;
+}
+.drag .drag__out-word {
+  border: 1px;
+  color: black;
+  background-color: var(--color);
+  padding: 6px;
+  border-radius: 10px;
+}/*# sourceMappingURL=task-6.css.map */

@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="css/tasks/task-1.css">
     <link rel="stylesheet" href="css/tasks/task-2.css">
     <link rel="stylesheet" href="css/tasks/task-5.css">
+    <link rel="stylesheet" href="css/tasks/task-6.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script defer src="js/main.js"></script>
     <script defer src="js/test.js"></script>
+    <script defer src="js/drag.js"></script>
     <title>Skillture</title>
 </head>
 
@@ -265,6 +267,37 @@
                         </div>
                     </div>
                 </div>
+            </section>
+            <section class="history" id="3">
+                <div class="history__bg">
+                    <div class="container">
+                        <div class="history__wrapper">
+                            <div class="history__title">Задание 6</div>
+                            <div class="history__text">Слова <br> Вариант 2</div>
+                            <div class="drag">
+                                <div class="drag__intermediate-container" id="drag__intermediate-container"
+                                    ondragenter="dragEnter(event)" ondrop="dragDrop(event)"
+                                    ondragover="dragOver(event)">
+                                </div>
+                                <div class="drag__down">
+                                    <div class="drag__default-container" id="drag__default-container"
+                                        ondragenter="dragEnter(event)" ondrop="dragDropDefault(event)"
+                                        ondragover="dragOverDefault(event)">
+
+                                    </div>
+                                    <div class="drag__input">
+                                        <div class="drag__input-wrapper">
+                                            <input type="text" id="drag__input" />
+                                            <button id="drag__submit">Разобрать</button>
+                                        </div>
+                                        <div class="drag__out-container">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </section>
         </main>
         <footer class="footer">
