@@ -63,7 +63,7 @@ function onClick(e) {
     }
 }
 
-function buildDragWord(element, key) {
+function buildDragWord(element, key, id) {
     let dragContainer = prebuildDragWord(element, key)
 
     dragContainer.draggable = true
@@ -73,6 +73,12 @@ function buildDragWord(element, key) {
     dragContainer.addEventListener("dragend", dragEnd)
 
     dragContainer.addEventListener("click", onClick)
+    
+    dragContainer.style.opacity = "0.0"
+    dragContainer.style.transition = `opacity 0.2s ${id * 0.1}s`
+    requestAnimationFrame( () => {
+        dragContainer.style.opacity = "1"
+    })
 
     root.append(dragContainer)
 }
@@ -106,17 +112,33 @@ function dragDropDefault(e) {
     e.preventDefault();
     const payload = JSON.parse(e.dataTransfer.getData("application/json"))
 
-    drag = document.getElementById("dragged-container");
+    drag = document.getElementById("dragged-container")
     
+    drag.style.opacity = "0.3"
+    drag.style.transition = `opacity 0.2s`
+    requestAnimationFrame( () => {
+        drag.style.opacity = "1"
+    })
+
+    const key = drag.querySelector(".drag__key").textContent.charAt(0)
+    const index = Number(drag.querySelector(".drag__key").textContent.substring(1))
+
     for (const child of e.currentTarget.children) {
-        if (comparator(
-            child.querySelector(".drag__word").textContent, 
-            drag.querySelector(".drag__word").textContent) > 0)
-            {
-                e.currentTarget.insertBefore(drag, child);
-                return;
-            }
+
+        const key1 = child.querySelector(".drag__key").textContent.charAt(0)
+        const index1 = Number(child.querySelector(".drag__key").textContent.substring(1))
+
+        if (key > key1)
+        {
+            continue
+        }
+        if(key < key1 || index < index1)
+        {
+            e.currentTarget.insertBefore(drag, child);
+            return;
+        }
     }
+
 
     e.currentTarget.append(drag);
 }
@@ -129,7 +151,7 @@ function dragOverDefault(e) {
 
 function testString(element) {
     return {
-        isNum: /[0-9].*/u.test(element),
+        isNum: !isNaN(element),
         isUpper: /\p{Lu}.*/u.test(element),
         isLower: /\p{Ll}.*/u.test(element),
     }
@@ -147,16 +169,17 @@ function onButtonClick() {
     let a = 1
     let b = 1
     let n = 1
+    let id = 0;
     for (const element of array) {
         let data = testString(element)
         if (data.isNum) {
-            buildDragWord(element, "n" + (n++))
+            buildDragWord(element, "n" + (n++), id++)
         }
         else if (data.isUpper) {
-            buildDragWord(element, "b" + (b++))
+            buildDragWord(element, "b" + (b++), id++)
         }
         else if (data.isLower) {
-            buildDragWord(element, "a" + (a++))
+            buildDragWord(element, "a" + (a++), id++)
         }
 
     }
