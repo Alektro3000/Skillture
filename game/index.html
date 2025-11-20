@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="src/math.js"></script>
+    <script defer src="src/data.js"></script>
+    <script defer src="src/proj.js"></script>
+    <script defer src="src/furn.js"></script>
+    <script defer src="src/drag.js"></script>
+    <script defer src="src/debug.js"></script>
+    <script defer src="src/main.js"></script>
+    <title>Задания</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="elements-view">
+            
+        </div>
+        <div class="view">
+            <div class="view__control">
+                <div class="view__change" title="Сменить вид">
+                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="view__delete" title="Очистить комнату">
+                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="2">
+                        <path d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"  stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="view__grid" title="Режим привязки к сетке">
+                    <svg class = "view__grid-svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="2">
+                        <path d="M7 3V21"/> <path d="M17 3V21"/> <path d="M21 17L3 17"/> <path d="M21 7L3 7"/>
+                    </svg>
+                    <svg class = "view__grid-none" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="2">
+                        <path d="M7 3V21"/> <path d="M17 3V21"/> <path d="M21 17L3 17"/> <path d="M21 7L3 7"/> <path stroke="#b12030" d="M16 2L8 22"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="view__wrapper">
+                <div class = "view__cross">
+                    <div class="view__elements"></div>
+                    <div class="view__canvas"
+                    style = "translate: -50% -50%; pointer-events: none; z-index: 2000; position: absolute;">
+                        <canvas width="600px" height="600px" style="display: block;">
+
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mock-element">
+
+    </div>
+</body>
+
+</html>

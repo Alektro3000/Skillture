@@ -47,7 +47,10 @@
   gap: 12px;
   padding: 12px;
   flex: 1;
-  min-width: 130px;
+  width: 130px;
+  min-width: -moz-min-content;
+  min-width: min-content;
+  min-height: 67px;
   border: 1px white solid;
   align-items: center;
 }
