@@ -1,5 +1,8 @@
+var debugEnabled = false; 
 
 function drawSquare(mx, bound) {
+    if(!debugEnabled)
+        return
 
     const canvas = document.querySelector("canvas")
     const ctx = canvas.getContext("2d")
@@ -25,6 +28,9 @@ function drawSquare(mx, bound) {
 }
 
 function drawFurnitureBox(worldFurniture) {
+    if(!debugEnabled)
+        return
+
     if(currentProjection.getName() != "iso")
         return;
     const mx = worldFurniture.getMinPoint();
@@ -37,7 +43,18 @@ function drawFurnitureBox(worldFurniture) {
 }
 
 function clearCanvas() {
+    
+    if(!debugEnabled)
+        return
     const canvas = document.querySelector("canvas")
     const ctx = canvas.getContext("2d")
     ctx.clearRect(0,0,6000,6000)
 }
+/*
+<div class="view__canvas"
+                    style = "translate: -50% -50%; pointer-events: none; z-index: 2000; position: absolute;">
+                        <canvas width="600px" height="600px" style="display: block;">
+
+                        </canvas>
+                    </div>
+*/

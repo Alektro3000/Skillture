@@ -44,7 +44,7 @@ furnitureList = [
         size: {
             x: 10,
             y: 10,
-            z: 12.2
+            z: 12.1
         },
         type: "ground",
         name: "Куб"
