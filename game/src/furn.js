@@ -11,6 +11,7 @@ function prebuildFurniture(furniture) {
     let furnitureImg = document.createElement("img")
     furnitureImg.className = "element__img"
     furnitureImg.src = furniture.getImgIsoName()
+    furnitureImg.alt = ""
 
     furnitureWrapper.append(furnitureImg)
     furnitureContainer.append(furnitureWrapper)

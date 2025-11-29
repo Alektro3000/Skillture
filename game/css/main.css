@@ -48,26 +48,6 @@ body {
   max-width: 30px;
   max-height: 30px;
 }
-.view__control .view__change-room {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 8px;
-  max-width: none;
-}
-.view__control .view__change-room svg {
-  width: 24px;
-  height: 24px;
-}
-.view__control .view__change-room-value {
-  font-size: 0.75rem;
-  background: #f5deb3;
-  border: 1px solid wheat;
-  border-radius: 6px;
-  padding: 2px 6px;
-  white-space: nowrap;
-  color: #000;
-}
 .view__control .view__grid {
   position: relative;
 }
@@ -272,28 +252,4 @@ body {
           user-select: none;
   translate: -50% -50%;
   opacity: 0.5;
-}
-.mock-element .mock__bottom {
-  position: fixed;
-  width: var(--X);
-  height: var(--Y);
-  transform-origin: left top;
-  border: #444cf7 4px solid;
-  transform: matrix(1, 0.5, 1, -0.5, 0, 0);
-}
-.mock-element .mock__side {
-  position: fixed;
-  width: var(--Y);
-  height: var(--Z);
-  transform-origin: left top;
-  border: #444cf7 4px solid;
-  transform: matrix(1, -0.5, 0, 1, 0, 0);
-}
-.mock-element .mock__back {
-  position: fixed;
-  width: var(--X);
-  height: var(--Z);
-  transform-origin: left top;
-  border: #444cf7 4px solid;
-  transform: matrix(1, 0.5, 0, 1, 0, 0);
 }/*# sourceMappingURL=main.css.map */
