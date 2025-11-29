@@ -2,57 +2,40 @@ const mock = document.querySelector(".mock-element")
 const center = document.querySelector(".view__cross")
 const viewElements = document.querySelector(".view__elements")
 
+
+const MIN_ROOM_SIZE = furnitureList.reduce(
+    (acc, item) =>
+        new Point(
+            Math.max(acc.x, item.size.x),
+            Math.max(acc.y, item.size.y),
+            Math.max(acc.z, item.size.z)
+        ),
+    new Point(0, 0, 0)
+);
+
+let roomSizeIndex = ROOM_SIZE_PRESETS.findIndex(
+    (preset) =>
+        preset.x === 40 &&
+        preset.y === 40 &&
+        preset.z === 25
+);
+if (roomSizeIndex === -1) roomSizeIndex = 0;
+
+let roomSize = Point.fromObject(ROOM_SIZE_PRESETS[roomSizeIndex]);
+
 var GridSnappingEnabled = true;
 
 var currentProjection = new IsoProjection();
 
-
-function checkIntersection(furniture) {
-    var ans = [];
-    for (const inter of world) {
-        const difference = furniture.getMidPoint().sub(inter.getMidPoint())
-        const size = furniture.data.getBoundingBox().add(inter.data.getBoundingBox()).scale(0.5)
-        
-        //console.log(difference, size)
-        
-        if (difference.isInBoundingBox(size.scale(-1), size) ) {
-            ans.push(inter);
-        }
-    }
-    return ans;
-}
-
-function prebuildFurnitureFromNum(num) {
-    const furniture = new Furniture(furnitureList[num]);
-    return prebuildFurniture(furniture)
-}
-
-function prebuildFurniture(furniture) {
-    let furnitureContainer = document.createElement("div")
-    furnitureContainer.className = "element"
-    furnitureContainer.dataset.furniture = furniture.toJson()
-
-    let furnitureWrapper = document.createElement("div")
-    furnitureWrapper.className = "element__img-wrapper"
-
-    let furnitureImg = document.createElement("img")
-    furnitureImg.className = "element__img"
-    furnitureImg.src = furniture.getImgIsoName()
-
-    furnitureWrapper.append(furnitureImg)
-    furnitureContainer.append(furnitureWrapper)
-
-    let furnitureName = document.createElement("div")
-    furnitureName.className = "element__text"
-    furnitureName.textContent = furniture.getName()
-    furnitureContainer.append(furnitureName)
-
-    return furnitureContainer;
-}
-
 function clickDelete() {
     world = [];
     viewElements.replaceChildren();
+}
+
+function onRoomSizeButtonClick(e) {
+    e.preventDefault();
+    const step = e.shiftKey ? -1 : 1;
+    cycleRoomSize(step);
 }
 
 function switchGrid() {
@@ -70,20 +53,31 @@ function setUpFurnitureList() {
 
         furnitureContainer.addEventListener("dragstart", dragstartFromList)
         furnitureContainer.addEventListener("drag", dragFromList)
-        furnitureContainer.addEventListener("dragend", dragcancelFromList)
+        furnitureContainer.addEventListener("dragend", dragcancel)
 
         furnitureListContainer.append(furnitureContainer);
         iter++;
     }
 }
+function onLogin() {
+    document.querySelector(".login-popup").classList.add("login-popup--fading");
+    
+    const newWorld = onLoad("FurnitureSaving|" + document.querySelector("#login").value);
+    if(newWorld != null)
+        world = newWorld
 
+    redrawWorldElements();
+    world.sort(currentProjection.ZComparator)
+    world.forEach((elem, id) => elem.ref.style.zIndex = 1 + 2*id);
+}
 setUpFurnitureList();
+
 currentProjection.setUpWorldGrid();
 
 
 document.querySelector(".view__cross").addEventListener("dragstart", dragstartFromView)
 document.querySelector(".view__cross").addEventListener("drag", dragFromView)
-document.querySelector(".view__cross").addEventListener("dragend", dragCancelFromList)
+document.querySelector(".view__cross").addEventListener("dragend", dragcancel)
 
 document.querySelector(".view__change").addEventListener("click", setUpWorldView)
 
@@ -94,12 +88,20 @@ document.querySelector(".elements-view").addEventListener("drop", dropDelete)
 document.querySelector(".elements-view").addEventListener("dragover", dragOverSimple)
 
 document.querySelector(".view__delete").addEventListener("click", clickDelete)
+document.querySelector(".view__save").addEventListener("click", () => onSave("FurnitureSaving|" + document.querySelector("#login").value, world))
+document.querySelector(".view__change-room").addEventListener("click", onRoomSizeButtonClick)
 
 document.querySelector(".view__grid").addEventListener("click",switchGrid)
 
 document.addEventListener("mousemove", mouseMove)
 
+document.getElementById("button").addEventListener("click", onLogin)
 
+document.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() === 'd') {
+    debugEnabled = !debugEnabled;
+  }
+});
 
 /*
 setInterval(() => {

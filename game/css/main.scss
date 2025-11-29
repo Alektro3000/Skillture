@@ -222,6 +222,41 @@ body {
     height: 100vh;
     display: flex;
 }
+.login-popup{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(245, 222, 179, 0.5);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: 0.2s;
+    &.login-popup--fading {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .login-popup__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    .login-popup__form > * {
+        display: flex;
+        border: rgba(245, 222, 179, 1) solid 2px;
+        background: #e5e5f7;
+        min-width: 50%;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: x-large;
+    }
+}
+
 
 .elements-view {
     padding: 12px;
@@ -268,37 +303,4 @@ body {
     user-select: none;
     translate: -50% -50%;
     opacity: 0.5;
-
-    .mock__bottom {
-        position: fixed;
-        width: var(--X);
-        height: var(--Y);
-        transform-origin: left top;
-
-        border: #444cf7 4px solid;
-
-        transform: matrix(1, 0.5, 1, -0.5, 0, 0);
-    }
-
-    .mock__side {
-        position: fixed;
-        width: var(--Y);
-        height: var(--Z);
-        transform-origin: left top;
-
-        border: #444cf7 4px solid;
-
-        transform: matrix(1, -0.5, 0, 1, 0, 0);
-    }
-
-    .mock__back {
-        position: fixed;
-        width: var(--X);
-        height: var(--Z);
-        transform-origin: left top;
-
-        border: #444cf7 4px solid;
-
-        transform: matrix(1, 0.5, 0, 1, 0, 0);
-    }
 }

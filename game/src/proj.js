@@ -1,9 +1,38 @@
 
+
 function getMinPoint() {
     return new Point(0, 0, 0)
 }
 function getMaxPoint() {
-    return new Point(30, 20, 25)
+    return Point.fromObject(roomSize)
+}
+
+function cycleRoomSize(step = 1) {
+    roomSizeIndex =
+        (roomSizeIndex + step + ROOM_SIZE_PRESETS.length) %
+        ROOM_SIZE_PRESETS.length;
+    setRoomSize(ROOM_SIZE_PRESETS[roomSizeIndex]);
+}
+
+function setRoomSize(newRoomSize) {
+    const normalized = newRoomSize;
+    roomSize = Point.fromObject(normalized);
+
+    const matchedPreset = ROOM_SIZE_PRESETS.findIndex(
+        (preset) =>
+            preset.x === roomSize.x &&
+            preset.y === roomSize.y &&
+            preset.z === roomSize.z
+    );
+    if (matchedPreset !== -1) roomSizeIndex = matchedPreset;
+
+    currentProjection.removeWorldGrid();
+    currentProjection.setUpWorldGrid();
+
+    clampWorldToRoom();
+
+    updateWorldElementsPositions();
+    
 }
 
 const Projections = {
@@ -25,7 +54,7 @@ function setUpCSS(gridSize) {
 }
 
 
-const ISO_RAY_DIR = new Point (
+const ISO_RAY_DIR = new Point(
     0.57,
     0.57,
     0.57
@@ -42,7 +71,7 @@ function genericAdd(type, conversion) {
 }
 
 class IsoProjection {
-    
+
     getName() {
         return "iso";
     }
@@ -55,35 +84,34 @@ class IsoProjection {
         const screenX = (pos.x - pos.y) * tw / 2
         const screenY = (pos.x + pos.y) * th / 2 - pos.z * th
         //console.log("screen:", screenX, screenY)
-        return new Point(screenX,  screenY)
+        return new Point(screenX, screenY)
     }
-    ZComparator(a,b) {
+    ZComparator(a, b) {
         const mx = a.getMidPoint().sub(b.getMidPoint())
         const size = a.data.getBoundingBox().add(b.data.getBoundingBox()).scale(0.5)
-        return (mx.x/size.x + mx.y/size.y + mx.z/size.z);
+        return (mx.x / size.x + mx.y / size.y + mx.z / size.z);
     }
-    
+
     setUpWorldGrid() {
         genericAdd("bottom", point => point.PxToXY())
         genericAdd("side", point => point.PxToYZ())
         genericAdd("back", point => point.PxToXZ())
-        
+
         this.resizeObserver = new ResizeObserver((entries, observer) => {
-            for(let entry of entries)
-            {
+            for (let entry of entries) {
                 const height = entry.contentRect.height
                 const width = entry.contentRect.width
-                
+
                 let sz = getMaxPoint()
-                sz = new Point(width/ (sz.x+sz.y), height / (sz.z + (sz.x+sz.y)/2 ))
+                sz = new Point(width / (sz.x + sz.y), height / (sz.z + (sz.x + sz.y) / 2))
 
                 th = Math.min(sz.x, sz.y)
                 tw = th * 2
                 setUpCSS(th)
-                
+
                 updateWorldElementsPositions();
             }
-        
+
         });
         document.querySelector(".view__cross").style.translate = `
         calc( (var(--X) - var(--Y)) * -0.5 ) 
@@ -100,12 +128,12 @@ class IsoProjection {
     buildRayFromScreen(point) {
         const p = point.PxToXY();
 
-        const dir = ISO_RAY_DIR;   
+        const dir = ISO_RAY_DIR;
         const origin = new Point(p.x, p.y, 0).sub(dir.scale(200));
 
         return { origin, dir };
     }
-    setMockPosition(e, furniture){
+    setMockPosition(e, furniture) {
         setMockPosition(e.clientX, e.clientY - th * furniture.getBoundingBox().z / 2);
     }
 }
@@ -118,33 +146,33 @@ class TopProjection {
     setUpImage(furnitureImg, furniture) {
         furnitureImg.src = furniture.getImgVerName()
         furnitureImg.style.width = furniture.getBoundingBox().x * tileHeight + "px"
+        furnitureImg.style.height = furniture.getBoundingBox().y * tileHeight + "px"
     };
     convertWorldToPX(pos) {
-        return new Point( pos.x * tileHeight,  pos.y * tileHeight)
+        return new Point(pos.x * tileHeight, pos.y * tileHeight)
     }
-    ZComparator(a,b) {
+    ZComparator(a, b) {
         const mx = a.getMinPoint()
         const mxb = b.getMinPoint()
         return (mx.z) - (mxb.z);
     }
     setUpWorldGrid() {
         document.querySelector(".view__cross").style.translate = "calc(var(--X) * -0.5) calc(var(--Y) * -0.5)"
-        
+
         this.resizeObserver = new ResizeObserver((entries, observer) => {
-            for(let entry of entries)
-            {
+            for (let entry of entries) {
                 const height = entry.contentRect.height
                 const width = entry.contentRect.width
-                
+
                 let sz = getMaxPoint()
-                sz = new Point(width/ (sz.x), height / (sz.y))
+                sz = new Point(width / (sz.x), height / (sz.y))
 
                 tileHeight = Math.min(sz.x, sz.y)
                 setUpCSS(tileHeight)
-                
+
                 updateWorldElementsPositions();
             }
-        
+
         });
 
         this.resizeObserver.observe(document.querySelector(".view__wrapper"));
@@ -158,12 +186,12 @@ class TopProjection {
     buildRayFromScreen(point) {
         const p = point.PxToTop();
 
-        const dir = new Point(0,0,1);   
+        const dir = new Point(0, 0, 1);
         const origin = new Point(p.x, p.y, 0).sub(dir.scale(200));
 
         return { origin, dir };
     }
-    setMockPosition(e, furniture){
+    setMockPosition(e, furniture) {
         setMockPosition(e.clientX, e.clientY);
     }
 }

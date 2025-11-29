@@ -1,5 +1,28 @@
 var world = [];
 
+function prebuildFurniture(furniture) {
+    let furnitureContainer = document.createElement("div")
+    furnitureContainer.className = "element"
+    furnitureContainer.dataset.furniture = furniture.toJson()
+
+    let furnitureWrapper = document.createElement("div")
+    furnitureWrapper.className = "element__img-wrapper"
+
+    let furnitureImg = document.createElement("img")
+    furnitureImg.className = "element__img"
+    furnitureImg.src = furniture.getImgIsoName()
+
+    furnitureWrapper.append(furnitureImg)
+    furnitureContainer.append(furnitureWrapper)
+
+    let furnitureName = document.createElement("div")
+    furnitureName.className = "element__text"
+    furnitureName.textContent = furniture.getName()
+    furnitureContainer.append(furnitureName)
+
+    return furnitureContainer;
+}
+
 class Furniture {
     constructor(num) {
         this.num = num;
@@ -50,7 +73,7 @@ class Furniture {
         }
         
         if(furnitureList[this.num].type == "wall"){
-            if(type == "bottom")
+            if(type != "back" && type != "side")
                 return null
             return new Point(point.x, point.y, point.z)
         }
@@ -93,14 +116,14 @@ function setMockPositionFromWorld(worldFurniture) {
     mock.style.zIndex = (mx.x) + (mx.y) + mx.z + 100
 }
 function setMockPositionFromEvent(e, furniture) {
-    currentProjection.setMockPosition(e, furniture)
+    if(e.clientX != 0 && e.clientY != 0 )
+        currentProjection.setMockPosition(e, furniture)
 }
 function setMockPosition(x, y) {
     const mock = document.querySelector(".mock-element")
     mock.style.top = y + "px";
     mock.style.left = x + "px";
 }
-
 function setUpMock(furniture) {
 
     let furnitureImg = document.createElement("img")
@@ -204,4 +227,30 @@ function setUpWorldView() {
     redrawWorldElements();
     world.sort(currentProjection.ZComparator)
     world.forEach((elem, id) => elem.ref.style.zIndex = 1 + 2*id);
+}
+
+function clampWorldToRoom() {
+    const min = getMinPoint();
+    const max = getMaxPoint();
+
+    world.forEach((worldFurniture) => {
+        const extentNoZ = worldFurniture.data.getExtentNoZ();
+        const extent = worldFurniture.data.getExtent();
+
+        const minX = min.x + extentNoZ.x;
+        const minY = min.y + extentNoZ.y;
+        const minZ = min.z;
+
+        const maxX = Math.max(minX, max.x - extentNoZ.x);
+        const maxY = Math.max(minY, max.y - extentNoZ.y);
+        const maxZ = Math.max(minZ, max.z - extent.z);
+
+        const newOrigin = new Point(
+            Math.min(Math.max(worldFurniture.origin.x, minX), maxX),
+            Math.min(Math.max(worldFurniture.origin.y, minY), maxY),
+            Math.min(Math.max(worldFurniture.origin.z, minZ), maxZ)
+        );
+        if(worldFurniture.origin.sub(newOrigin).lengthSquared() > 0.01)
+            deleteWorldFurniture(worldFurniture.ref);
+    });
 }

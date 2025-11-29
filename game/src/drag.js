@@ -14,11 +14,12 @@ function dragstartFromList(e) {
 
 function dragFromList(e) {
     e.preventDefault()
+    
     setMockPositionFromEvent(e, dragged)
     clearIntersection()
 }
 
-function dragcancelFromList(e) {
+function dragcancel(e) {
     mock.replaceChildren()
     clearCanvas()
     clearIntersection()
@@ -80,12 +81,17 @@ function dropGeneric(e, conversion, type) {
     clearIntersection()
 
     if(worldPos == null)
+    {
+        dragcancel();
         return;
-
+    }
     const furniture = new WorldFurniture(dragged, worldPos)
 
     if (checkLoc(furniture))
+    {
+        dragcancel();
         return;
+    }
 
     addFurnitureToWorld(furniture)
     deleteWorldFurniture(draggedDom)
@@ -149,9 +155,4 @@ function dragFromView(e) {
     e.preventDefault()
     setMockPositionFromEvent(e, dragged)   
     clearIntersection() 
-}
-function dragCancelFromList(e) {
-    mock.replaceChildren()
-    clearCanvas()
-    clearIntersection()
 }

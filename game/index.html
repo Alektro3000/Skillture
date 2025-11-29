@@ -17,33 +17,82 @@
 
 <body>
     <div class="main-container">
+        <div class="login-popup">
+            <div class="login-popup__form">
+                <div class="login-popup__title">Введите название пользователя</div>
+                <input type="text" id="login" value="Петя" class="login-popup__input" />
+                <input type="button" id="button" value="Войти" class="login-popup__submit" />
+            </div>
+        </div>
         <div class="elements-view">
-            
+
         </div>
         <div class="view">
             <div class="view__control">
+                <div class="view__return" title="Обратно">
+                    <a href="../index.html">
+                        <svg width="800px" height="800px" viewBox="0 -960 960 960" fill="#000"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+                        </svg>
+                    </a>
+                </div>
                 <div class="view__change" title="Сменить вид">
-                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
                 <div class="view__delete" title="Очистить комнату">
-                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="2">
-                        <path d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"  stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        stroke="#000000" stroke-width="2">
+                        <path
+                            d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"
+                            stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
                 <div class="view__grid" title="Режим привязки к сетке">
-                    <svg class = "view__grid-svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="2">
-                        <path d="M7 3V21"/> <path d="M17 3V21"/> <path d="M21 17L3 17"/> <path d="M21 7L3 7"/>
+                    <svg class="view__grid-svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="2">
+                        <path d="M7 3V21" />
+                        <path d="M17 3V21" />
+                        <path d="M21 17L3 17" />
+                        <path d="M21 7L3 7" />
                     </svg>
-                    <svg class = "view__grid-none" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="2">
-                        <path d="M7 3V21"/> <path d="M17 3V21"/> <path d="M21 17L3 17"/> <path d="M21 7L3 7"/> <path stroke="#b12030" d="M16 2L8 22"/>
+                    <svg class="view__grid-none" width="800px" height="800px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="2">
+                        <path d="M7 3V21" />
+                        <path d="M17 3V21" />
+                        <path d="M21 17L3 17" />
+                        <path d="M21 7L3 7" />
+                        <path stroke="#b12030" d="M16 2L8 22" />
+                    </svg>
+                </div>
+                <div class="view__change-room" title="Сменить размер комнаты">
+                    <svg width="800px" height="800px" viewBox="0 -960 960 960" fill="#000000"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M120-120v-240h80v104l124-124 56 56-124 124h104v80H120Zm516-460-56-56 124-124H600v-80h240v240h-80v-104L636-580Z"/>
+                    </svg>
+                </div>
+                <div class="view__save" title="Сохранить">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="800px" viewBox="0 -960 960 960" width="800px"
+                        fill="#000">
+                        <path
+                            d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z" />
                     </svg>
                 </div>
             </div>
             <div class="view__wrapper">
-                <div class = "view__cross">
+                <div class="view__cross">
                     <div class="view__elements"></div>
+                    <div class="view__canvas"
+                        style="translate: -50% -50%; pointer-events: none; z-index: 2000; position: absolute;">
+                        <canvas width="600px" height="600px" style="display: block;">
+
+                        </canvas>
+                    </div>
                 </div>
             </div>
         </div>
